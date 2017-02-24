@@ -44,7 +44,7 @@ public abstract class Piece {
 
     boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
         return !est_capture
-                && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne);
+               && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne);
         // && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne);
     }
 
@@ -53,20 +53,20 @@ public abstract class Piece {
 
         colonne = nouvelle_colonne;
         ligne = nouvelle_ligne;
-        
+
         // echiquier.capturePiece();
-        
+
         echiquier.posePiece(this);
     }
-    
+
     @Override
     public String toString() {
         throw new UnsupportedOperationException("Not supported yet.");
         // retournera une représentation sous fore de chaine de l'état de la piece (tous ses attributs à l'exception de l'echiquier)
     }
-    
+
     abstract public String representationAscii();
-    
+
     abstract public String representationUnicode();
 
 }

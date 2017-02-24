@@ -10,12 +10,16 @@ public class Roi extends Piece {
 
     @Override
     public String representationAscii() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return estBlanc() ? "R" : "r";
     }
 
     @Override
     public String representationUnicode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return estBlanc() ? "♔" : "♚";
+    }
+
+    boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
