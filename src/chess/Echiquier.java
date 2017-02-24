@@ -4,8 +4,8 @@ package chess;
  * @author Léo Jetzer
  * @author Abdelhakim Qbaich
  */
-class Echiquier {
-    
+public class Echiquier {
+
     private Piece[][] tableau_de_jeu;
     private Piece[] blancs_captures, noirs_captures;
 
@@ -24,13 +24,13 @@ class Echiquier {
     public void posePiece(Piece p) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     public void capturePiece(int colonne, int ligne) {
     }
-    
+
     public void afficheAscii() {
     }
-    
+
     public void afficheUnicode() {
     }
 

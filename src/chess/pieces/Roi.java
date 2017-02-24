@@ -1,5 +1,6 @@
 package chess.pieces;
 
+import chess.Echiquier;
 import chess.Piece;
 
 /**
@@ -7,6 +8,10 @@ import chess.Piece;
  * @author Abdelhakim Qbaich
  */
 public class Roi extends Piece {
+
+    protected Roi (boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+        super(est_blanc, colonne, ligne, echiquier);
+    }
 
     @Override
     public String representationAscii() {
@@ -19,7 +24,8 @@ public class Roi extends Piece {
     }
 
     boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // TODO
+        throw new UnsupportedOperationException("Redéfinir la méthodes deplacementValide");
     }
 
 }
