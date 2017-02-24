@@ -6,15 +6,11 @@ package chess;
  */
 public class Echiquier {
 
-    private Piece[][] tableau_de_jeu;
-    private Piece[] blancs_captures, noirs_captures;
+    private final Piece[][] tableau_de_jeu;
+    private final Piece[] blancs_captures, noirs_captures;
 
     public boolean caseValide(int colonne, int ligne) {
-        if (colonne < 0 || colonne > 7 || ligne < 0 || ligne > 7) {
-            return false;
-        }
-
-        return true;
+        return colonne >= 0 && colonne <= 7 && ligne >= 0 && ligne <= 7;
     }
 
     public Piece examinePiece(int colonne, int ligne) {

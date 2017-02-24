@@ -6,9 +6,10 @@ package chess;
  */
 public abstract class Piece {
 
-    private boolean est_blanc, est_capture;
+    private final boolean est_blanc;
+    private boolean est_capture;
     private int colonne, ligne;
-    private Echiquier echiquier;
+    private final Echiquier echiquier;
 
     public boolean estBlanc() {
         return est_blanc;
@@ -42,8 +43,11 @@ public abstract class Piece {
         est_capture = true;
     }
 
-    boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
+    public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
+        // TODO Ask teacher/Rafik about it being public or not
         // TODO Potentiel NullPointerException à la dernière ligne
+        // TODO S'assurer qu'on ne peut pas passer à travers une pièce
+        // TODO Verify logic of all pieces
         return !est_capture
                && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)
                && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne).estBlanc() != est_blanc;

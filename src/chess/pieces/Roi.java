@@ -9,7 +9,7 @@ import chess.Piece;
  */
 public class Roi extends Piece {
 
-    protected Roi (boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+    protected Roi(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         super(est_blanc, colonne, ligne, echiquier);
     }
 
@@ -23,9 +23,11 @@ public class Roi extends Piece {
         return estBlanc() ? "♔" : "♚";
     }
 
-    boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        // TODO
-        throw new UnsupportedOperationException("Redéfinir la méthodes deplacementValide");
+    @Override
+    public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
+        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                && (Math.abs(nouvelle_colonne - getColonne()) <= 1)
+                && (Math.abs(nouvelle_ligne - getLigne()) <= 1);
     }
 
 }

@@ -23,9 +23,10 @@ public class Pion extends Piece {
         return estBlanc() ? "♙" : "♟";
     }
 
-    boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        // TODO
-        throw new UnsupportedOperationException("Redéfinir la méthodes deplacementValide");
+    @Override
+    public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
+        // TODO Mouvement pour capturer une pièce + mouvement de 2 cases de départ
+        return Math.abs(nouvelle_colonne - getColonne()) == 1;
     }
 
 }
