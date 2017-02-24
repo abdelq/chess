@@ -67,8 +67,8 @@ public abstract class Piece {
         throw new UnsupportedOperationException("Retourner une représentation sous forme de chaine de l'état de la piece (tous ses attributs à l'exception de l'echiquier)");
     }
 
-    abstract public String representationAscii();
+    public abstract String representationAscii();
 
-    abstract public String representationUnicode();
+    public abstract String representationUnicode();
 
 }
