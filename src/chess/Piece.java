@@ -61,6 +61,7 @@ public abstract class Piece {
     
     @Override
     public String toString() {
+        throw new UnsupportedOperationException("Not supported yet.");
         // retournera une représentation sous fore de chaine de l'état de la piece (tous ses attributs à l'exception de l'echiquier)
     }
     
