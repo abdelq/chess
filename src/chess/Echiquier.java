@@ -5,20 +5,33 @@ package chess;
  * @author Abdelhakim Qbaich
  */
 class Echiquier {
+    
+    private Piece[][] tableau_de_jeu;
+    private Piece[] blancs_captures, noirs_captures;
 
-    boolean caseValide(int nouvelle_colonne, int nouvelle_ligne) {
+    public boolean caseValide(int colonne, int ligne) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    boolean examinePiece(int nouvelle_colonne, int nouvelle_ligne) {
+    public Piece examinePiece(int colonne, int ligne) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    void prendsPiece(int nouvelle_colonne, int nouvelle_ligne) {
+    public Piece prendsPiece(int colonne, int ligne) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    void posePiece(Piece aThis) {
+    public void posePiece(Piece p) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void capturePiece(int colonne, int ligne) {
+    }
+    
+    public void afficheAscii() {
+    }
+    
+    public void afficheUnicode() {
+    }
+
 }
