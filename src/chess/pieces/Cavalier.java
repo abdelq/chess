@@ -9,7 +9,7 @@ import chess.Piece;
  */
 public class Cavalier extends Piece {
 
-    protected Cavalier(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+    public Cavalier(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         super(est_blanc, colonne, ligne, echiquier);
     }
 

@@ -9,7 +9,7 @@ import chess.Piece;
  */
 public class Tour extends Piece {
 
-    protected Tour(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+    public Tour(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         super(est_blanc, colonne, ligne, echiquier);
     }
 

@@ -9,7 +9,7 @@ import chess.Piece;
  */
 public class Pion extends Piece {
 
-    protected Pion (boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+    public Pion (boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         super(est_blanc, colonne, ligne, echiquier);
     }
 
