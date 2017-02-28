@@ -42,9 +42,8 @@ public class Echiquier {
         // TODO
         throw new UnsupportedOperationException("Afficher l'échiquier en utilisant des caractères Unicode.");
     }
-    
+
     public Echiquier() {
-        // TODO À optimiser
         tableau_de_jeu = new Piece[8][8];
 
         blancs_captures = new Piece[16];

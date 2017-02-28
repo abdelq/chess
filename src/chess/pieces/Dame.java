@@ -9,7 +9,7 @@ import chess.Piece;
  */
 public class Dame extends Piece {
 
-    public Dame (boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+    public Dame(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         super(est_blanc, colonne, ligne, echiquier);
     }
 
@@ -25,7 +25,9 @@ public class Dame extends Piece {
 
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne);
+        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                && (getColonne() == nouvelle_colonne || getLigne() == nouvelle_ligne
+                || nouvelle_colonne - getColonne() == nouvelle_ligne - getLigne());
     }
 
 }

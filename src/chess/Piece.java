@@ -7,7 +7,7 @@ package chess;
 public abstract class Piece {
 
     private final boolean est_blanc;
-    private boolean est_capture;
+    private boolean est_capture, est_deplace;
     private int colonne, ligne;
     private final Echiquier echiquier;
 
@@ -21,6 +21,10 @@ public abstract class Piece {
 
     public boolean estCapture() {
         return est_capture;
+    }
+
+    public boolean estDeplace() {
+        return est_deplace;
     }
 
     public int getLigne() {
@@ -44,13 +48,9 @@ public abstract class Piece {
     }
 
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        // TODO Ask teacher/Rafik about it being public or not
-        // TODO Potentiel NullPointerException à la dernière ligne
-        // TODO S'assurer qu'on ne peut pas passer à travers une pièce
-        // TODO Verify logic of all pieces
         return !est_capture
-               && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)
-               && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne).estBlanc() != est_blanc;
+                && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)
+                && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne).estBlanc() != est_blanc;
     }
 
     void deplace(int nouvelle_colonne, int nouvelle_ligne) {
@@ -58,17 +58,18 @@ public abstract class Piece {
 
         colonne = nouvelle_colonne;
         ligne = nouvelle_ligne;
+        est_deplace = true;
 
-        // TODO Appeler capturePiece, si nécessaire, pour capturer la pièce qui était à la nouvelle case
-        // echiquier.capturePiece(nouvelle_colonne, nouvelle_ligne);
+        if (echiquier.examinePiece(colonne, ligne) != null) {
+            echiquier.capturePiece(colonne, ligne);
+        }
 
         echiquier.posePiece(this);
     }
 
     @Override
     public String toString() {
-        // TODO
-        throw new UnsupportedOperationException("Retourner une représentation sous forme de chaine de l'état de la piece (tous ses attributs à l'exception de l'echiquier)");
+        return est_blanc + " " + est_capture + " " + est_deplace + " " + colonne + " " + ligne;
     }
 
     public abstract String representationAscii();

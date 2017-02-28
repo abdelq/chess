@@ -9,7 +9,7 @@ import chess.Piece;
  */
 public class Pion extends Piece {
 
-    public Pion (boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
+    public Pion(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         super(est_blanc, colonne, ligne, echiquier);
     }
 
@@ -25,8 +25,16 @@ public class Pion extends Piece {
 
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        // TODO Mouvement pour capturer une pièce + mouvement de 2 cases de départ
-        return Math.abs(nouvelle_colonne - getColonne()) == 1;
+        // TODO One-way
+        // TODO Capture
+
+        if (!estDeplace()) {
+            return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                    && Math.abs(nouvelle_ligne - getLigne()) <= 2;
+        }
+
+        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                && Math.abs(nouvelle_ligne - getLigne()) == 1;
     }
 
 }

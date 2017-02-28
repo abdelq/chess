@@ -26,8 +26,8 @@ public class Roi extends Piece {
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
         return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                && (Math.abs(nouvelle_colonne - getColonne()) <= 1)
-                && (Math.abs(nouvelle_ligne - getLigne()) <= 1);
+                && Math.abs(nouvelle_colonne - getColonne()) <= 1
+                && Math.abs(nouvelle_ligne - getLigne()) <= 1;
     }
 
 }
