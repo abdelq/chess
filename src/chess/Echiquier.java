@@ -61,8 +61,8 @@ public class Echiquier {
         board.add("   a b c d e f g h");
         board.add("   ― ― ― ― ― ― ― ―");
         
-        for (int i = 0; i < 8; i++) {
-            StringJoiner row = new StringJoiner(" ", i + "| ", " |" + i);
+        for (int i = 7; i > -1; i--) {
+            StringJoiner row = new StringJoiner(" ", (i + 1) + "| ", " |" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
                 Piece piece = examinePiece(j, i);
@@ -89,8 +89,8 @@ public class Echiquier {
         board.add("   a   b   c   d   e   f   g   h");
         board.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
         
-        for (int i = 0; i < 8; i++) {
-            StringJoiner row = new StringJoiner(" │ ", i + "│ ", " │" + i);
+        for (int i = 7; i > -1; i--) {
+            StringJoiner row = new StringJoiner(" │ ", (i + 1) + "│ ", " │" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
                 Piece piece = examinePiece(j, i);
@@ -122,29 +122,29 @@ public class Echiquier {
         noirs_captures = new Piece[16];
 
         // Placement de pièces blanches
-        tableau_de_jeu[4][7] = new Roi(true, 4, 7, this);
-        tableau_de_jeu[3][7] = new Dame(true, 3, 7, this);
-        tableau_de_jeu[0][7] = new Tour(true, 0, 7, this);
-        tableau_de_jeu[7][7] = new Tour(true, 7, 7, this);
-        tableau_de_jeu[2][7] = new Fou(true, 2, 7, this);
-        tableau_de_jeu[5][7] = new Fou(true, 5, 7, this);
-        tableau_de_jeu[1][7] = new Cavalier(true, 1, 7, this);
-        tableau_de_jeu[6][7] = new Cavalier(true, 6, 7, this);
+        tableau_de_jeu[4][0] = new Roi(true, 4, 0, this);
+        tableau_de_jeu[3][0] = new Dame(true, 3, 0, this);
+        tableau_de_jeu[0][0] = new Tour(true, 0, 0, this);
+        tableau_de_jeu[7][0] = new Tour(true, 7, 0, this);
+        tableau_de_jeu[2][0] = new Fou(true, 2, 0, this);
+        tableau_de_jeu[5][0] = new Fou(true, 5, 0, this);
+        tableau_de_jeu[1][0] = new Cavalier(true, 1, 0, this);
+        tableau_de_jeu[6][0] = new Cavalier(true, 6, 0, this);
 
         // Placement de pièces noires
-        tableau_de_jeu[4][0] = new Roi(false, 4, 0, this);
-        tableau_de_jeu[3][0] = new Dame(false, 3, 0, this);
-        tableau_de_jeu[0][0] = new Tour(false, 0, 0, this);
-        tableau_de_jeu[7][0] = new Tour(false, 7, 0, this);
-        tableau_de_jeu[2][0] = new Fou(false, 2, 0, this);
-        tableau_de_jeu[5][0] = new Fou(false, 5, 0, this);
-        tableau_de_jeu[1][0] = new Cavalier(false, 1, 0, this);
-        tableau_de_jeu[6][0] = new Cavalier(false, 6, 0, this);
+        tableau_de_jeu[4][7] = new Roi(false, 4, 7, this);
+        tableau_de_jeu[3][7] = new Dame(false, 3, 7, this);
+        tableau_de_jeu[0][7] = new Tour(false, 0, 7, this);
+        tableau_de_jeu[7][7] = new Tour(false, 7, 7, this);
+        tableau_de_jeu[2][7] = new Fou(false, 2, 7, this);
+        tableau_de_jeu[5][7] = new Fou(false, 5, 7, this);
+        tableau_de_jeu[1][7] = new Cavalier(false, 1, 7, this);
+        tableau_de_jeu[6][7] = new Cavalier(false, 6, 7, this);
 
         // Placement de pions
         for (int i = 0; i < 8; i++) {
-            tableau_de_jeu[i][6] = new Pion(true, i, 6, this);
-            tableau_de_jeu[i][1] = new Pion(false, i, 1, this);
+            tableau_de_jeu[i][1] = new Pion(true, i, 1, this);
+            tableau_de_jeu[i][6] = new Pion(false, i, 6, this);
         }
     }
 

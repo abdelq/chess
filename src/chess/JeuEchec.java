@@ -22,9 +22,11 @@ public class JeuEchec {
     }
 
     public static void demandeTour(String joueur) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        System.out.println("Joueur " + joueur + " ? ");
+        System.out.print("Joueur " + joueur + " ? ");
+
+        String[] deplacements = scan.nextLine().split(" ");
     }
 
     public static void main(String[] args) {
@@ -37,9 +39,9 @@ public class JeuEchec {
         while (true) {
             afficheEchiquier(echiquier, args[0]);
             demandeTour("Blanc");
+
             afficheEchiquier(echiquier, args[0]);
             demandeTour("Noir");
-            break;
         }
     }
 
