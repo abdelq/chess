@@ -8,12 +8,23 @@ import java.util.Scanner;
  */
 public class JeuEchec {
 
+    public static void afficheEchiquier(Echiquier echiquier, String mode) {
+        switch (mode) {
+            case "ascii":
+                echiquier.afficheAscii();
+                break;
+            case "unicode":
+                echiquier.afficheUnicode();
+                break;
+            default:
+                throw new IllegalArgumentException("Paramètre invalide");
+        }
+    }
+
     public static void demandeTour(String joueur) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Joueur " + joueur + " ? ");
-
-        // if invalid, call demandeTour again
+        System.out.println("Joueur " + joueur + " ? ");
     }
 
     public static void main(String[] args) {
@@ -24,11 +35,12 @@ public class JeuEchec {
         Echiquier echiquier = new Echiquier();
 
         while (true) {
+            afficheEchiquier(echiquier, args[0]);
             demandeTour("Blanc");
+            afficheEchiquier(echiquier, args[0]);
+            demandeTour("Noir");
+            break;
         }
-        // TODO Demander tour à tour à chaque joueur (en commençant par les blancs) d'indiquer le déplacement qu'ils veulent jouer
-        // TODO Reste du document
-        // TODO
     }
 
 }
