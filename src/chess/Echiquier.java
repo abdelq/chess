@@ -56,47 +56,42 @@ public class Echiquier {
 
     public void afficheAscii() {
         // TODO
-        throw new UnsupportedOperationException("Afficher l'échiquier en utilisant des caractères ASCII.");
     }
 
     public void afficheUnicode() {
         // TODO
-        throw new UnsupportedOperationException("Afficher l'échiquier en utilisant des caractères Unicode.");
     }
 
     public Echiquier() {
-        // TODO add stuff to tableau
         tableau_de_jeu = new Piece[8][8];
 
         blancs_captures = new Piece[16];
         noirs_captures = new Piece[16];
 
-        // Joueurs blancs
-        new Roi(true, 4, 7, this);
-        new Dame(true, 3, 7, this);
-        new Tour(true, 0, 7, this);
-        new Tour(true, 7, 7, this);
-        new Fou(true, 2, 7, this);
-        new Fou(true, 5, 7, this);
-        new Cavalier(true, 1, 7, this);
-        new Cavalier(true, 6, 7, this);
+        // Placement de pièces blanches
+        tableau_de_jeu[4][7] = new Roi(true, 4, 7, this);
+        tableau_de_jeu[3][7] = new Dame(true, 3, 7, this);
+        tableau_de_jeu[0][7] = new Tour(true, 0, 7, this);
+        tableau_de_jeu[7][7] = new Tour(true, 7, 7, this);
+        tableau_de_jeu[2][7] = new Fou(true, 2, 7, this);
+        tableau_de_jeu[5][7] = new Fou(true, 5, 7, this);
+        tableau_de_jeu[1][7] = new Cavalier(true, 1, 7, this);
+        tableau_de_jeu[6][7] = new Cavalier(true, 6, 7, this);
 
+        // Placement de pièces noires
+        tableau_de_jeu[4][0] = new Roi(false, 4, 0, this);
+        tableau_de_jeu[3][0] = new Dame(false, 3, 0, this);
+        tableau_de_jeu[0][0] = new Tour(false, 0, 0, this);
+        tableau_de_jeu[7][0] = new Tour(false, 7, 0, this);
+        tableau_de_jeu[2][0] = new Fou(false, 2, 0, this);
+        tableau_de_jeu[5][0] = new Fou(false, 5, 0, this);
+        tableau_de_jeu[1][0] = new Cavalier(false, 1, 0, this);
+        tableau_de_jeu[6][0] = new Cavalier(false, 6, 0, this);
+
+        // Placement de pions
         for (int i = 0; i < 8; i++) {
-            new Pion(true, i, 6, this);
-        }
-
-        // Joueurs noirs
-        new Roi(false, 4, 0, this);
-        new Dame(false, 3, 0, this);
-        new Tour(false, 0, 0, this);
-        new Tour(false, 7, 0, this);
-        new Fou(false, 2, 0, this);
-        new Fou(false, 5, 0, this);
-        new Cavalier(false, 1, 0, this);
-        new Cavalier(false, 6, 0, this);
-
-        for (int i = 0; i < 8; i++) {
-            new Pion(false, i, 1, this);
+            tableau_de_jeu[i][6] = new Pion(true, i, 6, this);
+            tableau_de_jeu[i][1] = new Pion(false, i, 1, this);
         }
     }
 

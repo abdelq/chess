@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.StringJoiner;
+
 /**
  * @author Léo Jetzer
  * @author Abdelhakim Qbaich
@@ -69,12 +71,16 @@ public abstract class Piece {
 
     @Override
     public String toString() {
-        // TODO Make it better this.getClass().getName() or ReflectionToStringBuilder
-        return "est_blanc:" + est_blanc
-                + " est_capture:" + est_capture
-                + " est_deplace:" + est_deplace
-                + " colonne:" + colonne
-                + " ligne:" + ligne;
+        return new StringJoiner(" ")
+                .add(getClass().getSimpleName())
+                .add("[")
+                .add("est_blanc=" + est_blanc)
+                .add("est_capture=" + est_capture)
+                .add("est_deplace=" + est_deplace)
+                .add("colonne=" + colonne)
+                .add("ligne=" + ligne)
+                .add("]")
+                .toString();
     }
 
     public abstract String representationAscii();

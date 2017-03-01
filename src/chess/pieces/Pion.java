@@ -25,21 +25,29 @@ public class Pion extends Piece {
 
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        // TODO One-way
-        // TODO Capture
+        // TODO Refactor
 
         if (!estDeplace()) {
             if (estNoir()) {
                 return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                        && nouvelle_ligne - getLigne() >= -2;
+                        && nouvelle_ligne - getLigne() >= -2
+                        && getColonne() == nouvelle_colonne;
             }
 
             return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                    && nouvelle_ligne - getLigne() <= 2;
+                    && nouvelle_ligne - getLigne() <= 2
+                    && getColonne() == nouvelle_colonne;
         }
 
-        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne);
-        //&& Math.abs(nouvelle_ligne - getLigne()) == 1;
+        if (estNoir()) {
+            return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                    && Math.abs(nouvelle_colonne - getColonne()) == 1
+                    && nouvelle_ligne - getLigne() >= -1;
+        }
+
+        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                && Math.abs(nouvelle_colonne - getColonne()) == 1
+                && nouvelle_ligne - getLigne() <= 1;
     }
 
 }
