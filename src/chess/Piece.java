@@ -69,7 +69,12 @@ public abstract class Piece {
 
     @Override
     public String toString() {
-        return est_blanc + " " + est_capture + " " + est_deplace + " " + colonne + " " + ligne;
+        // TODO Make it better this.getClass().getName() or ReflectionToStringBuilder
+        return "est_blanc:" + est_blanc
+                + " est_capture:" + est_capture
+                + " est_deplace:" + est_deplace
+                + " colonne:" + colonne
+                + " ligne:" + ligne;
     }
 
     public abstract String representationAscii();

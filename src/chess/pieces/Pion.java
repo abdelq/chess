@@ -29,12 +29,17 @@ public class Pion extends Piece {
         // TODO Capture
 
         if (!estDeplace()) {
+            if (estNoir()) {
+                return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
+                        && nouvelle_ligne - getLigne() >= -2;
+            }
+
             return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                    && Math.abs(nouvelle_ligne - getLigne()) <= 2;
+                    && nouvelle_ligne - getLigne() <= 2;
         }
 
-        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                && Math.abs(nouvelle_ligne - getLigne()) == 1;
+        return super.deplacementValide(nouvelle_colonne, nouvelle_ligne);
+        //&& Math.abs(nouvelle_ligne - getLigne()) == 1;
     }
 
 }

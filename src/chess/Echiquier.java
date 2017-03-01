@@ -12,7 +12,7 @@ public class Echiquier {
     private final Piece[] blancs_captures, noirs_captures;
 
     public boolean caseValide(int colonne, int ligne) {
-        return colonne >= 0 && colonne <= 7 && ligne >= 0 && ligne <= 7;
+        return colonne > -1 && colonne < 8 && ligne > -1 && ligne < 8;
     }
 
     public Piece examinePiece(int colonne, int ligne) {
@@ -20,8 +20,11 @@ public class Echiquier {
     }
 
     public Piece prendsPiece(int colonne, int ligne) {
-        // TODO
-        throw new UnsupportedOperationException("Semblable à la méthode examinePiece mais qui en plus 'enlève' la pièce du tableau_de_jeu en mettant sa case à null.");
+        Piece piece = tableau_de_jeu[colonne][ligne];
+        
+        tableau_de_jeu[colonne][ligne] = null;
+        
+        return piece;
     }
 
     public void posePiece(Piece p) {
@@ -29,8 +32,26 @@ public class Echiquier {
     }
 
     public void capturePiece(int colonne, int ligne) {
-        // TODO
-        throw new UnsupportedOperationException("Semblable à la méthode prendsPiece mais qui en plus l'ajoute dans le bon tableau de pièces capturées.");
+        Piece piece = tableau_de_jeu[colonne][ligne];
+        
+        tableau_de_jeu[colonne][ligne] = null;
+        
+        // Ajout dans le tableau de pièces capturées
+        if (piece.estBlanc()) {
+            for (int i = 0; i < blancs_captures.length; i++) {
+                if (blancs_captures[i] == null) {
+                    blancs_captures[i] = piece;
+                    break;
+                }
+            }
+        } else {
+            for (int i = 0; i < noirs_captures.length; i++) {
+                if (noirs_captures[i] == null) {
+                    noirs_captures[i] = piece;
+                    break;
+                }
+            }
+        }
     }
 
     public void afficheAscii() {
@@ -44,6 +65,7 @@ public class Echiquier {
     }
 
     public Echiquier() {
+        // TODO add stuff to tableau
         tableau_de_jeu = new Piece[8][8];
 
         blancs_captures = new Piece[16];

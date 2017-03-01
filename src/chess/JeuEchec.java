@@ -28,6 +28,7 @@ public class JeuEchec {
         }
         // TODO Demander tour à tour à chaque joueur (en commençant par les blancs) d'indiquer le déplacement qu'ils veulent jouer
         // TODO Reste du document
+        // TODO
     }
 
 }

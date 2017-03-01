@@ -26,7 +26,7 @@ public class Fou extends Piece {
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
         return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                && nouvelle_colonne - getColonne() == nouvelle_ligne - getLigne();
+                && Math.abs(nouvelle_colonne - getColonne()) == Math.abs(nouvelle_ligne - getLigne());
     }
 
 }
