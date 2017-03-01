@@ -1,6 +1,7 @@
 package chess;
 
 import chess.pieces.*;
+import java.util.StringJoiner;
 
 /**
  * @author Léo Jetzer
@@ -55,11 +56,60 @@ public class Echiquier {
     }
 
     public void afficheAscii() {
-        // TODO
+        StringJoiner board = new StringJoiner(System.lineSeparator());
+        
+        board.add("a b c d e f g h");
+        board.add("― ― ― ― ― ― ― ―");
+        
+        for (int i = 7; i > -1; i--) {
+            StringJoiner row = new StringJoiner(" ", i + "|", "|" + i);
+
+            for (int j = 0; j < 8; j++) {
+                Piece piece = examinePiece(j, i);
+                
+                if (piece != null) {
+                    row.add(piece.representationAscii());
+                } else {
+                    row.add(".");
+                }
+            }
+
+            board.merge(row);
+        }
+        
+        board.add("― ― ― ― ― ― ― ―");
+        board.add("a b c d e f g h");
+        
+        System.out.println(board);
     }
 
     public void afficheUnicode() {
-        // TODO
+        StringJoiner board = new StringJoiner(System.lineSeparator());
+        
+        board.add("  a   b   c   d   e   f   g   h  ");
+        board.add("┌───┬───┬───┬───┬───┬───┬───┬───┐");
+        
+        for (int i = 7; i > -1; i--) {
+            StringJoiner row = new StringJoiner(" │ ", i + "│ ", " │" + i);
+
+            for (int j = 0; j < 8; j++) {
+                Piece piece = examinePiece(j, i);
+                
+                if (piece != null) {
+                    row.add(piece.representationUnicode());
+                } else {
+                    row.add(" ");
+                }
+            }
+
+            board.merge(row);
+            board.add("├───┼───┼───┼───┼───┼───┼───┼───┤");
+        }
+        
+        board.add("└───┴───┴───┴───┴───┴───┴───┴───┘");
+        board.add("  a   b   c   d   e   f   g   h  ");
+        
+        System.out.println(board);
     }
 
     public Echiquier() {
