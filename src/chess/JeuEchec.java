@@ -10,14 +10,14 @@ public class JeuEchec {
 
     public static void afficheEchiquier(Echiquier echiquier, String mode) {
         switch (mode) {
-            case "ascii":
-                echiquier.afficheAscii();
-                break;
-            case "unicode":
-                echiquier.afficheUnicode();
-                break;
-            default:
-                throw new IllegalArgumentException("Paramètre invalide");
+        case "ascii":
+            echiquier.afficheAscii();
+            break;
+        case "unicode":
+            echiquier.afficheUnicode();
+            break;
+        default:
+            throw new IllegalArgumentException("Paramètre invalide");
         }
     }
 

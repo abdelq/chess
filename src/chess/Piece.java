@@ -51,8 +51,8 @@ public abstract class Piece {
 
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
         return !est_capture
-                && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)
-                && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne).estBlanc() != est_blanc;
+               && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)
+               && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne).estBlanc() != est_blanc;
     }
 
     void deplace(int nouvelle_colonne, int nouvelle_ligne) {
@@ -71,14 +71,15 @@ public abstract class Piece {
 
     @Override
     public String toString() {
+        // TODO Better representation
         return getClass().getSimpleName()
-                + new StringJoiner(" ", "[", "]")
-                        .add("est_blanc=" + est_blanc)
-                        .add("est_capture=" + est_capture)
-                        .add("est_deplace=" + est_deplace)
-                        .add("colonne=" + colonne)
-                        .add("ligne=" + ligne)
-                        .toString();
+               + new StringJoiner(" ", "[", "]")
+               .add("est_blanc=" + est_blanc)
+               .add("est_capture=" + est_capture)
+               .add("est_deplace=" + est_deplace)
+               .add("colonne=" + colonne)
+               .add("ligne=" + ligne)
+               .toString();
     }
 
     public abstract String representationAscii();

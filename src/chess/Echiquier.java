@@ -1,7 +1,7 @@
 package chess;
 
-import chess.pieces.*;
 import java.util.StringJoiner;
+import chess.pieces.*;
 
 /**
  * @author Léo Jetzer
@@ -22,9 +22,9 @@ public class Echiquier {
 
     public Piece prendsPiece(int colonne, int ligne) {
         Piece piece = tableau_de_jeu[colonne][ligne];
-        
+
         tableau_de_jeu[colonne][ligne] = null;
-        
+
         return piece;
     }
 
@@ -34,9 +34,9 @@ public class Echiquier {
 
     public void capturePiece(int colonne, int ligne) {
         Piece piece = tableau_de_jeu[colonne][ligne];
-        
+
         tableau_de_jeu[colonne][ligne] = null;
-        
+
         // Ajout dans le tableau de pièces capturées
         if (piece.estBlanc()) {
             for (int i = 0; i < blancs_captures.length; i++) {
@@ -56,17 +56,18 @@ public class Echiquier {
     }
 
     public void afficheAscii() {
+        // TODO Review
         StringJoiner board = new StringJoiner(System.lineSeparator());
-        
+
         board.add("   a b c d e f g h");
         board.add("   ― ― ― ― ― ― ― ―");
-        
+
         for (int i = 7; i > -1; i--) {
             StringJoiner row = new StringJoiner(" ", (i + 1) + "| ", " |" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
                 Piece piece = examinePiece(j, i);
-                
+
                 if (piece != null) {
                     row.add(piece.representationAscii());
                 } else {
@@ -76,25 +77,26 @@ public class Echiquier {
 
             board.add(row.toString());
         }
-        
+
         board.add("   ― ― ― ― ― ― ― ―");
         board.add("   a b c d e f g h");
-        
+
         System.out.println(board);
     }
 
     public void afficheUnicode() {
+        // TODO Review
         StringJoiner board = new StringJoiner(System.lineSeparator());
-        
+
         board.add("   a   b   c   d   e   f   g   h");
         board.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
-        
+
         for (int i = 7; i > -1; i--) {
             StringJoiner row = new StringJoiner(" │ ", (i + 1) + "│ ", " │" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
                 Piece piece = examinePiece(j, i);
-                
+
                 if (piece != null) {
                     row.add(piece.representationUnicode());
                 } else {
@@ -108,14 +110,15 @@ public class Echiquier {
                 board.add(" ├───┼───┼───┼───┼───┼───┼───┼───┤");
             }
         }
-        
+
         board.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
         board.add("   a   b   c   d   e   f   g   h");
-        
+
         System.out.println(board);
     }
 
     public Echiquier() {
+        // TODO Review
         tableau_de_jeu = new Piece[8][8];
 
         blancs_captures = new Piece[16];
