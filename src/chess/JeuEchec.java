@@ -40,8 +40,8 @@ public class JeuEchec {
             demandeTour(est_blanc);
             return;
         } else if (deplacements.length == 2) {
-            int[] ori = {deplacements[0].charAt(0) - 97, Character.getNumericValue(deplacements[0].charAt(1))};
-            int[] dest = {deplacements[1].charAt(0) - 97, Character.getNumericValue(deplacements[1].charAt(1))};
+            int[] ori = {deplacements[0].charAt(0) - 97, Character.getNumericValue(deplacements[0].charAt(1)) - 1};
+            int[] dest = {deplacements[1].charAt(0) - 97, Character.getNumericValue(deplacements[1].charAt(1)) - 1};
 
             if (echiquier.caseValide(ori[0], ori[1])) {
                 Piece piece = echiquier.examinePiece(ori[0], ori[1]);

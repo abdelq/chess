@@ -31,13 +31,13 @@ public class Pion extends Piece {
         if (estBlanc()) {
             ligne_valide = nouvelle_ligne - getLigne() == 1;
 
-            if (estDeplace()) {
+            if (!estDeplace()) {
                 ligne_valide = ligne_valide || nouvelle_ligne - getLigne() == 2;
             }
         } else {
             ligne_valide = nouvelle_ligne - getLigne() == -1;
 
-            if (estDeplace()) {
+            if (!estDeplace()) {
                 ligne_valide = ligne_valide || nouvelle_ligne - getLigne() == -2;
             }
         }

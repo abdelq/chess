@@ -114,7 +114,7 @@ public class Echiquier {
 
             tableau.add(ligne.toString());
 
-            if (i < 7) {
+            if (i > 0) {
                 tableau.add(" ├───┼───┼───┼───┼───┼───┼───┼───┤");
             }
         }

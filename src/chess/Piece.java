@@ -69,7 +69,7 @@ public abstract class Piece {
     }
 
     void deplace(int nouvelle_colonne, int nouvelle_ligne) {
-        echiquier.prendsPiece(nouvelle_colonne, nouvelle_ligne);
+        echiquier.prendsPiece(colonne, ligne);
 
         colonne = nouvelle_colonne;
         ligne = nouvelle_ligne;
