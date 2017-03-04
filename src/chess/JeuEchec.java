@@ -55,6 +55,7 @@ public class JeuEchec {
         }
 
         System.out.println("Ce n'est pas un déplacement valide.");
+        System.out.println("Exemple de déplacement : e4 e5");
         demandeTour(est_blanc);
     }
 

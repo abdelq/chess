@@ -50,7 +50,7 @@ public abstract class Piece {
         this.echiquier = echiquier;
     }
 
-    void meSuisFaitCapture() {
+    public void meSuisFaitCapture() {
         est_capture = true;
     }
 

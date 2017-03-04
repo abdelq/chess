@@ -29,5 +29,10 @@ public class Roi extends Piece {
                && Math.abs(nouvelle_colonne - getColonne()) <= 1
                && Math.abs(nouvelle_ligne - getLigne()) <= 1;
     }
-
+    
+    @Override
+    public void meSuisFaitCapture() {
+        // TODO Message de qui a gagné
+        System.exit(0);
+    }
 }

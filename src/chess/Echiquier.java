@@ -57,8 +57,11 @@ public class Echiquier {
     }
 
     public void afficheAscii() {
+        // TODO Liste des pièces capturées
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
+        tableau.add("Les noirs ont capture : ");
+        tableau.add("");
         tableau.add("   a b c d e f g h");
         tableau.add("   ― ― ― ― ― ― ― ―");
 
@@ -80,13 +83,19 @@ public class Echiquier {
 
         tableau.add("   ― ― ― ― ― ― ― ―");
         tableau.add("   a b c d e f g h");
+        tableau.add("");
+        tableau.add("Les blancs ont capture : ");
 
         System.out.println(tableau);
     }
 
     public void afficheUnicode() {
+        // TODO Liste des pièces capturées
+        // TODO Utiliser PrintStream
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
+        tableau.add("Les noirs ont capturé : ");
+        tableau.add("");
         tableau.add("   a   b   c   d   e   f   g   h");
         tableau.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
 
@@ -112,6 +121,8 @@ public class Echiquier {
 
         tableau.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
         tableau.add("   a   b   c   d   e   f   g   h");
+        tableau.add("");
+        tableau.add("Les blancs ont capturé : ");
 
         System.out.println(tableau);
     }
