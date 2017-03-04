@@ -25,28 +25,30 @@ public class Pion extends Piece {
 
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        // TODO Refactor
-        if (!estDeplace()) {
-            if (estNoir()) {
-                return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                       && nouvelle_ligne - getLigne() >= -2
-                       && getColonne() == nouvelle_colonne;
-            }
+        boolean ligne_valide;
+        boolean colonne_valide = getColonne() == nouvelle_colonne;
 
-            return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                   && nouvelle_ligne - getLigne() <= 2
-                   && getColonne() == nouvelle_colonne;
+        if (estBlanc()) {
+            ligne_valide = nouvelle_ligne - getLigne() == 1;
+
+            if (estDeplace()) {
+                ligne_valide = ligne_valide || nouvelle_ligne - getLigne() == 2;
+            }
+        } else {
+            ligne_valide = nouvelle_ligne - getLigne() == -1;
+
+            if (estDeplace()) {
+                ligne_valide = ligne_valide || nouvelle_ligne - getLigne() == -2;
+            }
         }
 
-        if (estNoir()) {
-            return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                   && Math.abs(nouvelle_colonne - getColonne()) == 1
-                   && nouvelle_ligne - getLigne() >= -1;
+        // Capture
+        if (getEchiquier().examinePiece(nouvelle_colonne, nouvelle_ligne) != null) {
+            colonne_valide = Math.abs(nouvelle_colonne - getColonne()) <= 1;
         }
 
         return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-               && Math.abs(nouvelle_colonne - getColonne()) == 1
-               && nouvelle_ligne - getLigne() <= 1;
+                && ligne_valide && colonne_valide;
     }
 
 }
