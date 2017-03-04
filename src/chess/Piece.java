@@ -39,10 +39,11 @@ public abstract class Piece {
 
     protected Piece(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         this.est_blanc = est_blanc;
+        this.est_capture = false;
+        this.est_deplace = false;
         this.colonne = colonne;
         this.ligne = ligne;
         this.echiquier = echiquier;
-        this.est_capture = false;
     }
 
     void meSuisFaitCapture() {
