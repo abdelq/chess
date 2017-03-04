@@ -1,7 +1,7 @@
 package chess;
 
-import chess.pieces.*;
 import java.util.StringJoiner;
+import chess.pieces.*;
 
 /**
  * @author Léo Jetzer
@@ -22,9 +22,9 @@ public class Echiquier {
 
     public Piece prendsPiece(int colonne, int ligne) {
         Piece piece = tableau_de_jeu[colonne][ligne];
-        
+
         tableau_de_jeu[colonne][ligne] = null;
-        
+
         return piece;
     }
 
@@ -34,9 +34,10 @@ public class Echiquier {
 
     public void capturePiece(int colonne, int ligne) {
         Piece piece = tableau_de_jeu[colonne][ligne];
-        
+
         tableau_de_jeu[colonne][ligne] = null;
-        
+        piece.meSuisFaitCapture();
+
         // Ajout dans le tableau de pièces capturées
         if (piece.estBlanc()) {
             for (int i = 0; i < blancs_captures.length; i++) {
@@ -56,63 +57,74 @@ public class Echiquier {
     }
 
     public void afficheAscii() {
-        StringJoiner board = new StringJoiner(System.lineSeparator());
-        
-        board.add("   a b c d e f g h");
-        board.add("   ― ― ― ― ― ― ― ―");
-        
+        // TODO Liste des pièces capturées
+        StringJoiner tableau = new StringJoiner(System.lineSeparator());
+
+        tableau.add("Les noirs ont capture : ");
+        tableau.add("");
+        tableau.add("   a b c d e f g h");
+        tableau.add("   ― ― ― ― ― ― ― ―");
+
         for (int i = 7; i > -1; i--) {
-            StringJoiner row = new StringJoiner(" ", (i + 1) + "| ", " |" + (i + 1));
+            StringJoiner ligne = new StringJoiner(" ", (i + 1) + "| ", " |" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
                 Piece piece = examinePiece(j, i);
-                
+
                 if (piece != null) {
-                    row.add(piece.representationAscii());
+                    ligne.add(piece.representationAscii());
                 } else {
-                    row.add(".");
+                    ligne.add(".");
                 }
             }
 
-            board.add(row.toString());
+            tableau.add(ligne.toString());
         }
-        
-        board.add("   ― ― ― ― ― ― ― ―");
-        board.add("   a b c d e f g h");
-        
-        System.out.println(board);
+
+        tableau.add("   ― ― ― ― ― ― ― ―");
+        tableau.add("   a b c d e f g h");
+        tableau.add("");
+        tableau.add("Les blancs ont capture : ");
+
+        System.out.println(tableau);
     }
 
     public void afficheUnicode() {
-        StringJoiner board = new StringJoiner(System.lineSeparator());
-        
-        board.add("   a   b   c   d   e   f   g   h");
-        board.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
-        
+        // TODO Liste des pièces capturées
+        // TODO Utiliser PrintStream
+        StringJoiner tableau = new StringJoiner(System.lineSeparator());
+
+        tableau.add("Les noirs ont capturé : ");
+        tableau.add("");
+        tableau.add("   a   b   c   d   e   f   g   h");
+        tableau.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
+
         for (int i = 7; i > -1; i--) {
-            StringJoiner row = new StringJoiner(" │ ", (i + 1) + "│ ", " │" + (i + 1));
+            StringJoiner ligne = new StringJoiner(" │ ", (i + 1) + "│ ", " │" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
                 Piece piece = examinePiece(j, i);
-                
+
                 if (piece != null) {
-                    row.add(piece.representationUnicode());
+                    ligne.add(piece.representationUnicode());
                 } else {
-                    row.add(" ");
+                    ligne.add(" ");
                 }
             }
 
-            board.add(row.toString());
+            tableau.add(ligne.toString());
 
-            if (i < 7) {
-                board.add(" ├───┼───┼───┼───┼───┼───┼───┼───┤");
+            if (i > 0) {
+                tableau.add(" ├───┼───┼───┼───┼───┼───┼───┼───┤");
             }
         }
-        
-        board.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
-        board.add("   a   b   c   d   e   f   g   h");
-        
-        System.out.println(board);
+
+        tableau.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
+        tableau.add("   a   b   c   d   e   f   g   h");
+        tableau.add("");
+        tableau.add("Les blancs ont capturé : ");
+
+        System.out.println(tableau);
     }
 
     public Echiquier() {

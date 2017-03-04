@@ -37,26 +37,39 @@ public abstract class Piece {
         return colonne;
     }
 
+    public Echiquier getEchiquier() {
+        return echiquier;
+    }
+
     protected Piece(boolean est_blanc, int colonne, int ligne, Echiquier echiquier) {
         this.est_blanc = est_blanc;
+        this.est_capture = false;
+        this.est_deplace = false;
         this.colonne = colonne;
         this.ligne = ligne;
         this.echiquier = echiquier;
-        this.est_capture = false;
     }
 
-    void meSuisFaitCapture() {
+    public void meSuisFaitCapture() {
         est_capture = true;
     }
 
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        return !est_capture
-                && echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)
-                && echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne).estBlanc() != est_blanc;
+        if (echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)) {
+            Piece piece = echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne);
+
+            if (piece == null) {
+                return !est_capture;
+            }
+
+            return !est_capture && piece.estBlanc() != est_blanc;
+        }
+
+        return false;
     }
 
     void deplace(int nouvelle_colonne, int nouvelle_ligne) {
-        echiquier.prendsPiece(nouvelle_colonne, nouvelle_ligne);
+        echiquier.prendsPiece(colonne, ligne);
 
         colonne = nouvelle_colonne;
         ligne = nouvelle_ligne;
@@ -72,13 +85,13 @@ public abstract class Piece {
     @Override
     public String toString() {
         return getClass().getSimpleName()
-                + new StringJoiner(" ", "[", "]")
-                        .add("est_blanc=" + est_blanc)
-                        .add("est_capture=" + est_capture)
-                        .add("est_deplace=" + est_deplace)
-                        .add("colonne=" + colonne)
-                        .add("ligne=" + ligne)
-                        .toString();
+               + new StringJoiner(",", "[", "]")
+               .add("est_blanc=" + est_blanc)
+               .add("est_capture=" + est_capture)
+               .add("est_deplace=" + est_deplace)
+               .add("colonne=" + colonne)
+               .add("ligne=" + ligne)
+               .toString();
     }
 
     public abstract String representationAscii();
