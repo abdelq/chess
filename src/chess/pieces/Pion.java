@@ -48,7 +48,7 @@ public class Pion extends Piece {
         }
 
         return super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                && ligne_valide && colonne_valide;
+               && ligne_valide && colonne_valide;
     }
 
 }

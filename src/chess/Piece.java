@@ -85,13 +85,13 @@ public abstract class Piece {
     @Override
     public String toString() {
         return getClass().getSimpleName()
-                + new StringJoiner(",", "[", "]")
-                        .add("est_blanc=" + est_blanc)
-                        .add("est_capture=" + est_capture)
-                        .add("est_deplace=" + est_deplace)
-                        .add("colonne=" + colonne)
-                        .add("ligne=" + ligne)
-                        .toString();
+               + new StringJoiner(",", "[", "]")
+               .add("est_blanc=" + est_blanc)
+               .add("est_capture=" + est_capture)
+               .add("est_deplace=" + est_deplace)
+               .add("colonne=" + colonne)
+               .add("ligne=" + ligne)
+               .toString();
     }
 
     public abstract String representationAscii();

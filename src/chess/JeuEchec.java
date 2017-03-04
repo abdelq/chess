@@ -8,65 +8,54 @@ import java.util.Scanner;
  */
 public class JeuEchec {
 
-    public static void afficheEchiquier(Echiquier echiquier, String mode) {
-        switch (mode) {
-            case "ascii":
-                echiquier.afficheAscii();
-                break;
-            case "unicode":
-                echiquier.afficheUnicode();
-                break;
-            default:
-                throw new IllegalArgumentException("Paramètre invalide");
+    private static Echiquier echiquier;
+    private static String mode_affichage;
+
+    public static void afficheEchiquier() {
+        switch (mode_affichage) {
+        case "ascii":
+            echiquier.afficheAscii();
+            break;
+        case "unicode":
+            echiquier.afficheUnicode();
+            break;
+        default:
+            throw new IllegalArgumentException("Paramètre invalide");
         }
     }
 
-    public static void demandeTour(Echiquier echiquier, boolean est_blanc, String mode) {
+    public static void demandeTour(boolean est_blanc) {
         Scanner scan = new Scanner(System.in);
-        
+
         System.out.print("Joueur " + (est_blanc ? "Blanc" : "Noir") + " ? ");
 
         String[] deplacements = scan.nextLine().split(" ");
 
-        switch (deplacements.length) {
-            case 0:
-                afficheEchiquier(echiquier, mode);
-                // System.out.println("Grille");
-                demandeTour(echiquier, est_blanc, mode);
-                return;
-            case 1:
-                // System.out.println("deplacementsPossibles");
-                demandeTour(echiquier, est_blanc, mode);
-                return;
-            case 2:
-                break;
-            default:
-                System.out.println("Ce n'est pas un déplacement valide.");
-                demandeTour(echiquier, est_blanc, mode);
-                return;
+        if (deplacements.length == 0) {
+            afficheEchiquier();
+            demandeTour(est_blanc);
+            return;
+        } else if (deplacements.length == 1) {
+            // TODO deplacementsPossibles
+            demandeTour(est_blanc);
+            return;
+        } else if (deplacements.length == 2) {
+            int[] ori = {deplacements[0].charAt(0) - 97, Character.getNumericValue(deplacements[0].charAt(1))};
+            int[] dest = {deplacements[1].charAt(0) - 97, Character.getNumericValue(deplacements[1].charAt(1))};
+
+            if (echiquier.caseValide(ori[0], ori[1])) {
+                Piece piece = echiquier.examinePiece(ori[0], ori[1]);
+
+                if (piece != null && piece.estBlanc() == est_blanc && piece.deplacementValide(dest[0], dest[1])) {
+                    // TODO Afficher capture
+                    piece.deplace(dest[0], dest[1]);
+                    return;
+                }
+            }
         }
 
-        // TODO Transform directly to int
-        char[] ori = deplacements[0].toCharArray();
-        char[] dest = deplacements[1].toCharArray();
-
-        // TODO Use caseValide. deplacementValide already uses it
-        if (ori[0] < 'a' || ori[0] > 'h' || dest[0] < 'a' || dest[0] > 'h'
-                || ori[1] < '0' || ori[1] > '7' || dest[1] < '0' || dest[1] > '7') {
-            System.out.println("Ce n'est pas un déplacement valide.");
-            demandeTour(echiquier, est_blanc, mode);
-            return;
-        }
-              
-        Piece piece = echiquier.examinePiece(ori[0] - 97, Character.getNumericValue(ori[1]));
-        
-        if (piece == null || piece.estBlanc() != est_blanc || !piece.deplacementValide(dest[0] - 97, Character.getNumericValue(dest[1]))) {
-            System.out.println("Ce n'est pas un déplacement valide.");
-            demandeTour(echiquier, est_blanc, mode);
-            return;
-        }
-        
-        // Call piece.deplace when all is good.
+        System.out.println("Ce n'est pas un déplacement valide.");
+        demandeTour(est_blanc);
     }
 
     public static void main(String[] args) {
@@ -74,14 +63,15 @@ public class JeuEchec {
             throw new IllegalArgumentException("Paramètre requis");
         }
 
-        Echiquier echiquier = new Echiquier();
+        echiquier = new Echiquier();
+        mode_affichage = args[0];
 
         while (true) {
-            afficheEchiquier(echiquier, args[0]);
-            demandeTour(echiquier, true, args[0]);
+            afficheEchiquier();
+            demandeTour(true);
 
-            afficheEchiquier(echiquier, args[0]);
-            demandeTour(echiquier, false, args[0]);
+            afficheEchiquier();
+            demandeTour(false);
         }
     }
 
