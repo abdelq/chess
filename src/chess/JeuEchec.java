@@ -1,5 +1,7 @@
 package chess;
 
+import chess.pieces.Roi;
+
 import java.util.Scanner;
 
 /**
@@ -25,14 +27,12 @@ public class JeuEchec {
     }
 
     public static void demandeTour(boolean blanc) {
-        System.out.print("Joueur " + (blanc ? "Blanc" : "Noir") + " ? ");
-
         do {
+			System.out.print("Joueur " + (blanc ? "Blanc" : "Noir") + " ? ");
         	String line = scan.nextLine();
 			String[] deplacements = line.split(" ");
 			if (line.length() == 0){ // ligne vide
-				// todo: afficher l'echiquier
-				System.out.println("Afficher l'echiquier");
+				afficheEchiquier();
 			}
 			else if (deplacements.length == 1){
 				try {
@@ -68,8 +68,8 @@ public class JeuEchec {
 							System.out.println("Il n'est pas possible de deplacer une piece ennemi");
 						}
 						else if (piece.deplacementValide(arrive[0], arrive[1])){
-							// todo: deplacement
-							System.out.println("Deplacement de la piece");
+							Piece arr = echiquier.examinePiece(arrive[0], arrive[1]);
+							piece.deplace(arrive[0], arrive[1]);
 							break;
 						}
 						else {
@@ -104,7 +104,7 @@ public class JeuEchec {
             demandeTour(true);
 
             afficheEchiquier();
-            demandeTour(false);
+			demandeTour(false);
         }
     }
 
