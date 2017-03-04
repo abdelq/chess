@@ -21,33 +21,40 @@ public class JeuEchec {
         }
     }
 
-    public static void demandeTour(Echiquier echiquier, boolean est_blanc) {
-        // TODO Refactor
+    public static void demandeTour(Echiquier echiquier, boolean est_blanc, String mode) {
         Scanner scan = new Scanner(System.in);
-
-        if (est_blanc) {
-            System.out.print("Joueur Blanc ? ");
-        } else {
-            System.out.print("Joueur Noir ? ");
-        }
+        
+        System.out.print("Joueur " + (est_blanc ? "Blanc" : "Noir") + " ? ");
 
         String[] deplacements = scan.nextLine().split(" ");
 
-        if (deplacements.length != 2 || deplacements[0].length() != 2 || deplacements[1].length() != 2) {
-            System.out.println("Ce n'est pas un déplacement valide.");
-            demandeTour(echiquier, est_blanc);
-            return;
+        switch (deplacements.length) {
+            case 0:
+                afficheEchiquier(echiquier, mode);
+                // System.out.println("Grille");
+                demandeTour(echiquier, est_blanc, mode);
+                return;
+            case 1:
+                // System.out.println("deplacementsPossibles");
+                demandeTour(echiquier, est_blanc, mode);
+                return;
+            case 2:
+                break;
+            default:
+                System.out.println("Ce n'est pas un déplacement valide.");
+                demandeTour(echiquier, est_blanc, mode);
+                return;
         }
 
         // TODO Transform directly to int
         char[] ori = deplacements[0].toCharArray();
         char[] dest = deplacements[1].toCharArray();
 
-        // TODO Use caseValide
+        // TODO Use caseValide. deplacementValide already uses it
         if (ori[0] < 'a' || ori[0] > 'h' || dest[0] < 'a' || dest[0] > 'h'
                 || ori[1] < '0' || ori[1] > '7' || dest[1] < '0' || dest[1] > '7') {
             System.out.println("Ce n'est pas un déplacement valide.");
-            demandeTour(echiquier, est_blanc);
+            demandeTour(echiquier, est_blanc, mode);
             return;
         }
               
@@ -55,9 +62,11 @@ public class JeuEchec {
         
         if (piece == null || piece.estBlanc() != est_blanc || !piece.deplacementValide(dest[0] - 97, Character.getNumericValue(dest[1]))) {
             System.out.println("Ce n'est pas un déplacement valide.");
-            demandeTour(echiquier, est_blanc);
+            demandeTour(echiquier, est_blanc, mode);
             return;
         }
+        
+        // Call piece.deplace when all is good.
     }
 
     public static void main(String[] args) {
@@ -69,10 +78,10 @@ public class JeuEchec {
 
         while (true) {
             afficheEchiquier(echiquier, args[0]);
-            demandeTour(echiquier, true);
+            demandeTour(echiquier, true, args[0]);
 
             afficheEchiquier(echiquier, args[0]);
-            demandeTour(echiquier, false);
+            demandeTour(echiquier, false, args[0]);
         }
     }
 
