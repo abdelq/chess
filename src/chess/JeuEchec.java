@@ -64,10 +64,10 @@ public class JeuEchec {
                 try {
                     int[] orig = parseCoord(deplacements[0]);
                     int[] dest = parseCoord(deplacements[1]);
-                    
+
                     if (echiquier.caseValide(orig[0], orig[1])) {
                         Piece piece = echiquier.examinePiece(orig[0], orig[1]);
-                        
+
                         if (piece == null) {
                             System.out.println("Pas de piece a la case de depart");
                         } else if (piece.estBlanc() != blanc) {
