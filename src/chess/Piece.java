@@ -55,6 +55,7 @@ public abstract class Piece {
     }
 
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
+        // TODO Les pièces ne doivent pas passer à travers d'autres
         if (echiquier.caseValide(nouvelle_colonne, nouvelle_ligne)) {
             Piece piece = echiquier.examinePiece(nouvelle_colonne, nouvelle_ligne);
 

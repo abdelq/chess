@@ -56,11 +56,17 @@ public class Echiquier {
         }
     }
 
+    public String afficheCaptures(boolean blanc, boolean ascii) {
+        // TODO
+        return "";
+    }
+    
     public void afficheAscii() {
         // TODO Liste des pièces capturées
+        // TODO Refactor w/ afficheUnicode
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
-        tableau.add("Les noirs ont capture : ");
+        tableau.add("Les noirs ont capture : " + afficheCaptures(true, true));
         tableau.add("");
         tableau.add("   a b c d e f g h");
         tableau.add("   ― ― ― ― ― ― ― ―");
@@ -92,6 +98,7 @@ public class Echiquier {
     public void afficheUnicode() {
         // TODO Liste des pièces capturées
         // TODO Utiliser PrintStream
+        // TODO Refactor w/ afficheAscii
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
         tableau.add("Les noirs ont capturé : ");

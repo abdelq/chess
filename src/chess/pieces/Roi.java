@@ -32,7 +32,7 @@ public class Roi extends Piece {
     
     @Override
     public void meSuisFaitCapture() {
-        // TODO Message de qui a gagné
+        System.out.println("Gagnant : " + (estBlanc() ? "Noir" : "Blanc"));
         System.exit(0);
     }
 }
