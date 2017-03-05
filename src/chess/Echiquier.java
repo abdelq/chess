@@ -55,18 +55,13 @@ public class Echiquier {
             }
         }
     }
-
-    public String afficheCaptures(boolean blanc, boolean ascii) {
-        // TODO
-        return "";
-    }
     
     public void afficheAscii() {
         // TODO Liste des pièces capturées
         // TODO Refactor w/ afficheUnicode
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
-        tableau.add("Les noirs ont capture : " + afficheCaptures(true, true));
+        tableau.add("Les noirs ont capture : " + afficheCaptures(noirs_captures, true));
         tableau.add("");
         tableau.add("   a b c d e f g h");
         tableau.add("   ― ― ― ― ― ― ― ―");
@@ -90,7 +85,7 @@ public class Echiquier {
         tableau.add("   ― ― ― ― ― ― ― ―");
         tableau.add("   a b c d e f g h");
         tableau.add("");
-        tableau.add("Les blancs ont capture : ");
+        tableau.add("Les blancs ont capture : " + afficheCaptures(blancs_captures, true));
 
         System.out.println(tableau);
     }
@@ -101,7 +96,7 @@ public class Echiquier {
         // TODO Refactor w/ afficheAscii
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
-        tableau.add("Les noirs ont capturé : ");
+        tableau.add("Les noirs ont capturé : " + afficheCaptures(noirs_captures, false));
         tableau.add("");
         tableau.add("   a   b   c   d   e   f   g   h");
         tableau.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
@@ -129,7 +124,7 @@ public class Echiquier {
         tableau.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
         tableau.add("   a   b   c   d   e   f   g   h");
         tableau.add("");
-        tableau.add("Les blancs ont capturé : ");
+        tableau.add("Les blancs ont capturé : " + afficheCaptures(blancs_captures, false));
 
         System.out.println(tableau);
     }
@@ -167,4 +162,11 @@ public class Echiquier {
         }
     }
 
+    private static String afficheCaptures(Piece[] tab, boolean ascii){
+    	StringJoiner string = new StringJoiner(" ");
+    	for (Piece p : tab)
+    		if (p != null)
+    			string.add(ascii ? p.representationAscii() : p.representationUnicode());
+    	return string.toString();
+	}
 }
