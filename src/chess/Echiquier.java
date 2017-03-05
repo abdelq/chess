@@ -1,7 +1,9 @@
 package chess;
 
+import java.io.PrintStream;
 import java.util.StringJoiner;
 import chess.pieces.*;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Léo Jetzer
@@ -100,8 +102,8 @@ public class Echiquier {
         System.out.println(tableau);
     }
 
-    public void afficheUnicode() {
-        // TODO Utiliser PrintStream
+    public void afficheUnicode() throws UnsupportedEncodingException {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
         tableau.add("Les noirs ont capturé : " + afficheCaptures(blancs_captures, false));
@@ -134,7 +136,7 @@ public class Echiquier {
         tableau.add("");
         tableau.add("Les blancs ont capturé : " + afficheCaptures(noirs_captures, false));
 
-        System.out.println(tableau);
+        ps.println(tableau);
     }
 
     public Echiquier() {
