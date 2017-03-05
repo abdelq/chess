@@ -55,7 +55,7 @@ public class Echiquier {
             }
         }
     }
-    
+
     public void afficheAscii() {
         // TODO Liste des pièces capturées
         // TODO Refactor w/ afficheUnicode
@@ -162,11 +162,11 @@ public class Echiquier {
         }
     }
 
-    private static String afficheCaptures(Piece[] tab, boolean ascii){
-    	StringJoiner string = new StringJoiner(" ");
-    	for (Piece p : tab)
-    		if (p != null)
-    			string.add(ascii ? p.representationAscii() : p.representationUnicode());
-    	return string.toString();
-	}
+    private static String afficheCaptures(Piece[] tab, boolean ascii) {
+        StringJoiner string = new StringJoiner(" ");
+        for (Piece p : tab)
+            if (p != null)
+                string.add(ascii ? p.representationAscii() : p.representationUnicode());
+        return string.toString();
+    }
 }

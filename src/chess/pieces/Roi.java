@@ -29,7 +29,7 @@ public class Roi extends Piece {
                && Math.abs(nouvelle_colonne - getColonne()) <= 1
                && Math.abs(nouvelle_ligne - getLigne()) <= 1;
     }
-    
+
     @Override
     public void meSuisFaitCapture() {
         System.out.println("Gagnant : " + (estBlanc() ? "Noir" : "Blanc"));
