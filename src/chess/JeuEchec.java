@@ -1,7 +1,6 @@
 package chess;
 
-import chess.pieces.Roi;
-
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 /**
@@ -9,11 +8,11 @@ import java.util.Scanner;
  * @author Abdelhakim Qbaich
  */
 public class JeuEchec {
+    private static Scanner scan;
     private static Echiquier echiquier;
     private static String mode_affichage;
-    private static Scanner scan;
 
-    public static void afficheEchiquier() {
+    public static void afficheEchiquier() throws UnsupportedEncodingException {
         switch (mode_affichage) {
         case "ascii":
             echiquier.afficheAscii();
@@ -22,77 +21,78 @@ public class JeuEchec {
             echiquier.afficheUnicode();
             break;
         default:
-            throw new IllegalArgumentException("Paramètre invalide");
+            throw new IllegalArgumentException("Parametre (" + mode_affichage + ") invalide");
         }
     }
 
-    public static void demandeTour(boolean blanc) {
+    public static int[] parseCoord(String input) {
+        if (input.length() != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        return new int[] {input.charAt(0) - 97, input.charAt(1) - 49};
+    }
+
+    public static void demandeTour(boolean blanc) throws UnsupportedEncodingException {
         do {
             System.out.print("Joueur " + (blanc ? "Blanc" : "Noir") + " ? ");
+
             String line = scan.nextLine();
             String[] deplacements = line.split(" ");
-            if (line.length() == 0) { // ligne vide
+
+            if (line.length() == 0) { // Ligne vide
                 afficheEchiquier();
-            }
-            else if (deplacements.length == 1) {
+            } else if (deplacements.length == 1) {
                 try {
                     int[] coord = parseCoord(deplacements[0]);
+
                     if (echiquier.caseValide(coord[0], coord[1])) {
                         Piece piece = echiquier.examinePiece(coord[0], coord[1]);
+
                         if (piece != null) {
-                            // todo: afficher les deplacements possible
-                            System.out.println("Voici les deplacements possibles: (Pas vraiment...)");
+                            // TODO Déplacements possibles
+                        } else {
+                            System.out.println("Pas de piece a cet endroit");
                         }
-                        else {
-                            System.out.println("Il n'y a pas de piece a cet endroit");
-                        }
+                    } else {
+                        System.out.println("Case invalide");
                     }
-                    else {
-                        System.out.println("Cette case n'est pas valide [" + coord[0] + ", " + coord[1] + "]");
-                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Mauvais format de coordonnees. Bon format : lettre (a-h) suivie du chiffre (1-8)");
                 }
-                catch (IllegalArgumentException e) {
-                    System.out.println("La coordonnee n'a pas ete rentre dans le bon format. Il faut ecrire la lettre (a-h) suivit du chiffre (1-8) de la case desiree");
-                }
-            }
-            else if (deplacements.length == 2) {
+            } else if (deplacements.length == 2) {
                 try {
-                    int[] depart = parseCoord(deplacements[0]);
-                    int[] arrive = parseCoord(deplacements[1]);
-                    if (echiquier.caseValide(depart[0], depart[1])) {
-                        Piece piece = echiquier.examinePiece(depart[0], depart[1]);
+                    int[] orig = parseCoord(deplacements[0]);
+                    int[] dest = parseCoord(deplacements[1]);
+                    
+                    if (echiquier.caseValide(orig[0], orig[1])) {
+                        Piece piece = echiquier.examinePiece(orig[0], orig[1]);
+                        
                         if (piece == null) {
-                            System.out.println("Il n'y a pas de piece a la position de depart");
-                        }
-                        else if (piece.estBlanc() == blanc) {
-                            System.out.println("Il n'est pas possible de deplacer une piece ennemi");
-                        }
-                        else if (piece.deplacementValide(arrive[0], arrive[1])) {
-                            Piece arr = echiquier.examinePiece(arrive[0], arrive[1]);
-                            piece.deplace(arrive[0], arrive[1]);
+                            System.out.println("Pas de piece a la case de depart");
+                        } else if (piece.estBlanc() != blanc) {
+                            System.out.println("Impossible de deplacer une piece ennemie");
+                        } else if (piece.deplacementValide(dest[0], dest[1])) {
+                            piece.deplace(dest[0], dest[1]);
                             break;
+                        } else {
+                            System.out.println("Case de destination invalide");
                         }
-                        else {
-                            System.out.println("La destination n'est pas valide");
-                        }
+                    } else {
+                        System.out.println("Case d'origine invalide");
                     }
-                    else {
-                        System.out.println("La case de depart n'est pas valide");
-                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Mauvais format de coordonnees. Bon format : lettre (a-h) suivie du chiffre (1-8)");
                 }
-                catch (IllegalArgumentException e) {
-                    System.out.println("Les coordonnes n'ont pas ete rentre dans le bon format. Les coordonnes doivent etre rentre dans la forme lettre (a-h) suivit du chiffre (1-8)");
-                }
-            }
-            else {
-                System.out.println("wtf");
+            } else {
+                System.out.println("Ce n'est pas un deplacement valide");
             }
         } while(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         if (args.length < 1) {
-            throw new IllegalArgumentException("Paramètre requis");
+            throw new IllegalArgumentException("Parametre (ascii ou unicode) requis");
         }
 
         scan = new Scanner(System.in);
@@ -106,19 +106,6 @@ public class JeuEchec {
             afficheEchiquier();
             demandeTour(false);
         }
-    }
-
-    /**
-     * retourne un int[2] representant une coordonnee sur l'echiquier
-     * @param in : La coordonnee sous forme de chaine
-     * @return la coordonnee sous forme de deux entiers [colone, ligne]
-     */
-    public static int[] parseCoord(String in) {
-        if (in.length() != 2)
-            throw new IllegalArgumentException("La coordonnee rentre n'est pas valide");
-        char lettre = in.charAt(0);
-        char chiffre = in.charAt(1);
-        return new int[] {7-'h'+lettre, 7-'8'+chiffre};
     }
 
 }
