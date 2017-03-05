@@ -30,12 +30,9 @@ public class Tour extends Piece {
 				&& (getColonne() == nouvelle_colonne || ln)){
     		int step = ln ? (nouvelle_colonne > getColonne() ? 1 : -1) : (nouvelle_ligne > getLigne() ? 1 : -1);
     		int delta = Math.abs(ln ? nouvelle_colonne - getColonne() : nouvelle_ligne - getLigne());
-    		System.out.print("ln="+ln + " step="+step + " delta="+delta + " ");
 			for (int c = 1; c < delta; c++) {
-				System.out.print("T.");
 				if ((ln && getEchiquier().examinePiece(getColonne() + c * step, getLigne()) != null)
 						|| (!ln && getEchiquier().examinePiece(getColonne(), getLigne() + c * step) != null)) {
-					System.out.println("err");
 					return false;
 				}
 			}
