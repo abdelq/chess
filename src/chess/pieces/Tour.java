@@ -25,19 +25,32 @@ public class Tour extends Piece {
 
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        boolean ln = getLigne() == nouvelle_ligne;
-        if (super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                && (getColonne() == nouvelle_colonne || ln)) {
-            int step = ln ? (nouvelle_colonne > getColonne() ? 1 : -1) : (nouvelle_ligne > getLigne() ? 1 : -1);
-            int delta = Math.abs(ln ? nouvelle_colonne - getColonne() : nouvelle_ligne - getLigne());
-            for (int c = 1; c < delta; c++) {
-                if ((ln && getEchiquier().examinePiece(getColonne() + c * step, getLigne()) != null)
-                        || (!ln && getEchiquier().examinePiece(getColonne(), getLigne() + c * step) != null)) {
-                    return false;
+        if (super.deplacementValide(nouvelle_colonne, nouvelle_ligne)) {
+            if (getLigne() == nouvelle_ligne) {
+                int direction = nouvelle_colonne > getColonne() ? 1 : -1;
+                int delta = Math.abs(nouvelle_colonne - getColonne());
+
+                for (int i = 1; i < delta; i++) {
+                    if (getEchiquier().examinePiece(getColonne() + (i * direction), getLigne()) != null) {
+                        return false;
+                    }
                 }
+
+                return true;
+            } else if (getColonne() == nouvelle_colonne) {
+                int direction = nouvelle_ligne > getLigne() ? 1 : -1;
+                int delta = Math.abs(nouvelle_ligne - getLigne());
+
+                for (int i = 1; i < delta; i++) {
+                    if (getEchiquier().examinePiece(getColonne(), getLigne() + (i * direction)) != null) {
+                        return false;
+                    }
+                }
+
+                return true;
             }
-            return true;
         }
+
         return false;
     }
 

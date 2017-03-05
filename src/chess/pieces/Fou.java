@@ -25,16 +25,23 @@ public class Fou extends Piece {
 
     @Override
     public boolean deplacementValide(int nouvelle_colonne, int nouvelle_ligne) {
-        int dc = nouvelle_colonne - getColonne(), dl = nouvelle_ligne - getLigne();
+        int delta_colonne = nouvelle_colonne - getColonne();
+        int delta_ligne = nouvelle_ligne - getLigne();
+
         if (super.deplacementValide(nouvelle_colonne, nouvelle_ligne)
-                && Math.abs(dc) == Math.abs(dl)) {
-            int delta = Math.abs(dc);
-            int sc = dc < 0 ? -1 : 1, sl = dl < 0 ? -1 : 1;
-            for (int i = 1; i < delta; i++)
-                if (getEchiquier().examinePiece(getColonne() + i*sc, getLigne() + i*sl) != null)
+                && Math.abs(delta_colonne) == Math.abs(delta_ligne)) {
+            int delta = Math.abs(delta_colonne);
+            int dc = delta_colonne > 0 ? 1 : -1, dl = delta_ligne > 0 ? 1 : -1; // Direction (colonne, ligne)
+
+            for (int i = 1; i < delta; i++) {
+                if (getEchiquier().examinePiece(getColonne() + (i * dc), getLigne() + (i * dl)) != null) {
                     return false;
+                }
+            }
+
             return true;
         }
+
         return false;
     }
 
