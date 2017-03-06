@@ -16,28 +16,27 @@ public class JeuEchec {
     public static void afficheEchiquier() throws UnsupportedEncodingException {
         switch (mode_affichage) {
         case ASCII:
-            echiquier.afficheAscii();
+            echiquier.afficheAscii(null);
             break;
         case UNICODE:
-            echiquier.afficheUnicode();
+            echiquier.afficheUnicode(null);
             break;
         default:
             throw new IllegalArgumentException("Parametre (" + mode_affichage + ") invalide");
         }
     }
-    public static void afficherDepsPossibles(Piece p) throws UnsupportedEncodingException {
-    	System.out.println("Deplacements possibles:");
-		switch (mode_affichage) {
-			case ASCII:
-				echiquier.afficherDeplacementsAscii(p);
-				break;
-			case UNICODE:
-				echiquier.afficherDeplacementsUnicode(p);
-				break;
-			default:
-				throw new IllegalArgumentException("Paramètre invalide");
-		}
-	}
+    public static void afficherDepsPossibles(Piece piece) throws UnsupportedEncodingException {
+        System.out.println("Deplacements possibles : ");
+
+        switch (mode_affichage) {
+        case ASCII:
+            echiquier.afficheAscii(piece);
+            break;
+        case UNICODE:
+            echiquier.afficheUnicode(piece);
+            break;
+        }
+    }
 
     public static int[] parseCoord(String input) {
         if (input.length() != 2) {
@@ -64,7 +63,7 @@ public class JeuEchec {
                         Piece piece = echiquier.examinePiece(coord[0], coord[1]);
 
                         if (piece != null) {
-							afficherDepsPossibles(piece);
+                            afficherDepsPossibles(piece);
                         } else {
                             System.out.println("Pas de piece a cet endroit");
                         }
@@ -84,7 +83,7 @@ public class JeuEchec {
 
                         if (piece == null) {
                             System.out.println("Pas de piece a la case de depart");
-                        } else if (piece.estBlanc() == blanc) {
+                        } else if (piece.estBlanc() != blanc) {
                             System.out.println("Impossible de deplacer une piece ennemie");
                         } else if (piece.deplacementValide(dest[0], dest[1])) {
                             piece.deplace(dest[0], dest[1]);

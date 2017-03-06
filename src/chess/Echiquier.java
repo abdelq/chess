@@ -1,9 +1,9 @@
 package chess;
 
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.StringJoiner;
 import chess.pieces.*;
-import java.io.UnsupportedEncodingException;
 
 /**
  * @author Léo Jetzer
@@ -70,7 +70,7 @@ public class Echiquier {
         return captures.toString();
     }
 
-    public void afficheAscii() {
+    public void afficheAscii(Piece piece) {
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
         tableau.add("Les noirs ont capture : " + afficheCaptures(blancs_captures, true));
@@ -82,10 +82,12 @@ public class Echiquier {
             StringJoiner ligne = new StringJoiner(" ", (i + 1) + "| ", " |" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
-                Piece piece = examinePiece(j, i);
+                Piece p = examinePiece(j, i);
 
-                if (piece != null) {
-                    ligne.add(piece.representationAscii());
+                if (piece != null && piece.deplacementValide(j, i)) {
+                    ligne.add("X");
+                } else if (p != null) {
+                    ligne.add(p.representationAscii());
                 } else {
                     ligne.add(".");
                 }
@@ -102,36 +104,7 @@ public class Echiquier {
         System.out.println(tableau);
     }
 
-    public void afficherDeplacementsAscii(Piece piece){
-		StringJoiner tableau = new StringJoiner(System.lineSeparator());
-
-		tableau.add("   a b c d e f g h");
-		tableau.add("   ― ― ― ― ― ― ― ―");
-
-		for (int i = 7; i > -1; i--) {
-			StringJoiner ligne = new StringJoiner(" ", (i + 1) + "| ", " |" + (i + 1));
-
-			for (int j = 0; j < 8; j++) {
-				Piece p = examinePiece(j, i);
-
-				if (piece.deplacementValide(j, i))
-					ligne.add("X");
-				else if (p != null)
-					ligne.add(p.representationAscii());
-				else
-					ligne.add(".");
-			}
-
-			tableau.add(ligne.toString());
-		}
-
-		tableau.add("   ― ― ― ― ― ― ― ―");
-		tableau.add("   a b c d e f g h");
-
-		System.out.println(tableau);
-	}
-
-    public void afficheUnicode() throws UnsupportedEncodingException {
+    public void afficheUnicode(Piece piece) throws UnsupportedEncodingException {
         PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
@@ -144,10 +117,12 @@ public class Echiquier {
             StringJoiner ligne = new StringJoiner(" │ ", (i + 1) + "│ ", " │" + (i + 1));
 
             for (int j = 0; j < 8; j++) {
-                Piece piece = examinePiece(j, i);
+                Piece p = examinePiece(j, i);
 
-                if (piece != null) {
-                    ligne.add(piece.representationUnicode());
+                if (piece != null && piece.deplacementValide(j, i)) {
+                    ligne.add("X");
+                } else if (p != null) {
+                    ligne.add(p.representationUnicode());
                 } else {
                     ligne.add(" ");
                 }
@@ -167,40 +142,6 @@ public class Echiquier {
 
         ps.println(tableau);
     }
-
-    public void afficherDeplacementsUnicode(Piece piece) throws UnsupportedEncodingException {
-		PrintStream ps = new PrintStream(System.out, true, "UTF-8");
-		StringJoiner tableau = new StringJoiner(System.lineSeparator());
-
-		tableau.add("   a   b   c   d   e   f   g   h");
-		tableau.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
-
-		for (int i = 7; i > -1; i--) {
-			StringJoiner ligne = new StringJoiner(" │ ", (i + 1) + "│ ", " │" + (i + 1));
-
-			for (int j = 0; j < 8; j++) {
-				Piece p = examinePiece(j, i);
-
-				if (piece.deplacementValide(j, i))
-					ligne.add("X");
-				else if (p != null)
-					ligne.add(p.representationUnicode());
-				else
-					ligne.add(" ");
-			}
-
-			tableau.add(ligne.toString());
-
-			if (i > 0) {
-				tableau.add(" ├───┼───┼───┼───┼───┼───┼───┼───┤");
-			}
-		}
-
-		tableau.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
-		tableau.add("   a   b   c   d   e   f   g   h");
-
-		ps.println(tableau);
-	}
 
     public Echiquier() {
         tableau_de_jeu = new Piece[8][8];
