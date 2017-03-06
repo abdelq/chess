@@ -1,7 +1,9 @@
 package chess;
 
+import java.io.PrintStream;
 import java.util.StringJoiner;
 import chess.pieces.*;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Léo Jetzer
@@ -56,10 +58,22 @@ public class Echiquier {
         }
     }
 
+    private static String afficheCaptures(Piece[] pieces, boolean ascii) {
+        StringJoiner captures = new StringJoiner(" ");
+
+        for (Piece p : pieces) {
+            if (p != null) {
+                captures.add(ascii ? p.representationAscii() : p.representationUnicode());
+            }
+        }
+
+        return captures.toString();
+    }
+
     public void afficheAscii() {
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
-        tableau.add("Les noirs ont capture : " + strPieces(noirs_captures, true));
+        tableau.add("Les noirs ont capture : " + afficheCaptures(blancs_captures, true));
         tableau.add("");
         tableau.add("   a b c d e f g h");
         tableau.add("   ― ― ― ― ― ― ― ―");
@@ -83,7 +97,7 @@ public class Echiquier {
         tableau.add("   ― ― ― ― ― ― ― ―");
         tableau.add("   a b c d e f g h");
         tableau.add("");
-        tableau.add("Les blancs ont capture : " + strPieces(blancs_captures, true));
+        tableau.add("Les blancs ont capture : " + afficheCaptures(noirs_captures, true));
 
         System.out.println(tableau);
     }
@@ -117,11 +131,11 @@ public class Echiquier {
 		System.out.println(tableau);
 	}
 
-    public void afficheUnicode() {
-        // TODO Utiliser PrintStream
+    public void afficheUnicode() throws UnsupportedEncodingException {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
-        tableau.add("Les noirs ont capturé : " + strPieces(noirs_captures, false));
+        tableau.add("Les noirs ont capturé : " + afficheCaptures(blancs_captures, false));
         tableau.add("");
         tableau.add("   a   b   c   d   e   f   g   h");
         tableau.add(" ┌───┬───┬───┬───┬───┬───┬───┬───┐");
@@ -149,12 +163,13 @@ public class Echiquier {
         tableau.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
         tableau.add("   a   b   c   d   e   f   g   h");
         tableau.add("");
-        tableau.add("Les blancs ont capturé : " + strPieces(blancs_captures, false));
+        tableau.add("Les blancs ont capturé : " + afficheCaptures(noirs_captures, false));
 
-        System.out.println(tableau);
+        ps.println(tableau);
     }
 
-    public void afficherDeplacementsUnicode(Piece piece){
+    public void afficherDeplacementsUnicode(Piece piece) throws UnsupportedEncodingException {
+		PrintStream ps = new PrintStream(System.out, true, "UTF-8");
 		StringJoiner tableau = new StringJoiner(System.lineSeparator());
 
 		tableau.add("   a   b   c   d   e   f   g   h");
@@ -184,7 +199,7 @@ public class Echiquier {
 		tableau.add(" └───┴───┴───┴───┴───┴───┴───┴───┘");
 		tableau.add("   a   b   c   d   e   f   g   h");
 
-		System.out.println(tableau);
+		ps.println(tableau);
 	}
 
     public Echiquier() {
@@ -220,11 +235,4 @@ public class Echiquier {
         }
     }
 
-    private static String strPieces(Piece[] tab, boolean ascii){
-    	StringJoiner string = new StringJoiner(" ");
-    	for (Piece p : tab)
-    		if (p != null)
-    			string.add(ascii ? p.representationAscii() : p.representationUnicode());
-    	return string.toString();
-	}
 }
