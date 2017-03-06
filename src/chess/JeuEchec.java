@@ -12,19 +12,32 @@ public class JeuEchec {
     private static Echiquier echiquier;
     private static Scanner scan;
     private static String mode_affichage;
+    public static final String ASCII = "ascii", UNICODE = "unicode";
 
     public static void afficheEchiquier() {
         switch (mode_affichage) {
-        case "ascii":
+        case ASCII:
             echiquier.afficheAscii();
             break;
-        case "unicode":
+        case UNICODE:
             echiquier.afficheUnicode();
             break;
         default:
             throw new IllegalArgumentException("Paramètre invalide");
         }
     }
+    public static void afficherDepsPossibles(Piece p){
+		switch (mode_affichage) {
+			case ASCII:
+				echiquier.afficherDeplacementsAscii(p);
+				break;
+			case UNICODE:
+				echiquier.afficherDeplacementsUnicode(p);
+				break;
+			default:
+				throw new IllegalArgumentException("Paramètre invalide");
+		}
+	}
 
     public static void demandeTour(boolean blanc) {
         do {
@@ -40,8 +53,8 @@ public class JeuEchec {
 					if (echiquier.caseValide(coord[0], coord[1])){
 						Piece piece = echiquier.examinePiece(coord[0], coord[1]);
 						if (piece != null){
-							// todo: afficher les deplacements possible
-							System.out.println("Voici les deplacements possibles: (Pas vraiment...)");
+							System.out.println("Voici les deplacements possibles:");
+							afficherDepsPossibles(piece);
 						}
 						else {
 							System.out.println("Il n'y a pas de piece a cet endroit");
