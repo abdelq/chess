@@ -1,9 +1,6 @@
-package chess;
-
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.StringJoiner;
-import chess.pieces.*;
 
 /**
  * @author Léo Jetzer

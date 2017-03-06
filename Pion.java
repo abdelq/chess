@@ -1,8 +1,3 @@
-package chess.pieces;
-
-import chess.Echiquier;
-import chess.Piece;
-
 /**
  * @author Léo Jetzer
  * @author Abdelhakim Qbaich

@@ -1,5 +1,3 @@
-package chess;
-
 import java.util.StringJoiner;
 
 /**

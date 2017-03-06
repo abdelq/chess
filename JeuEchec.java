@@ -1,5 +1,3 @@
-package chess;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
